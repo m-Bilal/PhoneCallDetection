@@ -26,6 +26,9 @@ public class IncomingCallInfoActivity extends AppCompatActivity {
         textViewPhoneNumber = (TextView) findViewById(R.id.textview_incoming_call_number_IncomingCallInfoActivity);
         linearLayout = (LinearLayout) findViewById(R.id.linear_layout_IncomingCallInfoActivity);
 
+        String number = getIntent().getStringExtra("number");
+        textViewPhoneNumber.setText(number);
+
         setWindowParams();
     }
 
@@ -35,5 +38,11 @@ public class IncomingCallInfoActivity extends AppCompatActivity {
         wlp.flags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS |
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
         getWindow().setAttributes(wlp);
+
+        // Flags to show window on lockscreen
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
 }

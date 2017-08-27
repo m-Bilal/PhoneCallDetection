@@ -31,7 +31,8 @@
         </receiver>
 
         <activity android:name=".IncomingCallInfoActivity"
-            android:theme="@style/Theme.Transparent" >
+            android:theme="@style/Theme.Transparent"
+            android:showOnLockScreen="true" >
         </activity>
     </application>
 
