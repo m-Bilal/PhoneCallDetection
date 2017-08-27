@@ -1,6 +1,8 @@
 package com.bilal.phonecalldetection;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,8 +17,18 @@ public class CallReceiver extends PhonecallReceiver {
     public static final String TAG = "CallReceiver";
 
     @Override
-    protected void onIncomingCallReceived(Context ctx, String number, Date start) {
+    protected void onIncomingCallReceived(final Context ctx, final String number, Date start) {
         Log.d(TAG, "Incoming Call Received, Number : " + number);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(ctx, IncomingCallInfoActivity.class);
+                intent.putExtra("number", number);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ctx.startActivity(intent);
+            }
+        }, 2000);
     }
 
     @Override

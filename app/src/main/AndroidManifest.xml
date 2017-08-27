@@ -3,7 +3,7 @@
     package="com.bilal.phonecalldetection">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,7 @@
         </activity>
 
         <!-- Broadcast Receiver and Intent filter for incoming and outgoing calls -->
-        <receiver android:name=".CallReceiver" >
+        <receiver android:name=".CallReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
@@ -29,6 +29,10 @@
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".IncomingCallInfoActivity"
+            android:theme="@style/Theme.Transparent" >
+        </activity>
     </application>
 
 </manifest>

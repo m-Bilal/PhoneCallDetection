@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout_IncomingCallInfoActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#249"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="100dp"
+
+    tools:context="com.bilal.phonecalldetection.IncomingCallInfoActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Incoming Call"
+        android:background="#423"/>
+
+    <TextView
+        android:id="@+id/textview_incoming_call_number_IncomingCallInfoActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Incoming Call"
+        android:background="#423"/>
+
+</LinearLayout>
