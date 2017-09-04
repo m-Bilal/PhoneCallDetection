@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".IncomingCallInfoActivity"
+            android:showOnLockScreen="true"
+            android:theme="@style/Theme.Transparent" />
 
         <!-- Broadcast Receiver and Intent filter for incoming and outgoing calls -->
         <receiver android:name=".CallReceiver">
@@ -30,10 +36,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".IncomingCallInfoActivity"
-            android:theme="@style/Theme.Transparent"
-            android:showOnLockScreen="true" >
-        </activity>
+        <service
+            android:name=".service.CallStartInfoService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

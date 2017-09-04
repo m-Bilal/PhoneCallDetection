@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bilal.phonecalldetection.service.CallStartInfoService;
+
 import java.util.Date;
 
 /**
@@ -23,10 +25,18 @@ public class CallReceiver extends PhonecallReceiver {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                // Start the service
+                Intent intent = new Intent(ctx, CallStartInfoService.class);
+                intent.putExtra("number", number);
+                ctx.startService(intent);
+
+                /* Call to activity, to be removed
                 Intent intent = new Intent(ctx, IncomingCallInfoActivity.class);
                 intent.putExtra("number", number);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 ctx.startActivity(intent);
+                */
             }
         }, 2000);
     }
@@ -34,11 +44,21 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onIncomingCallAnswered(Context ctx, String number, Date start) {
         Log.d(TAG, "Incoming Call Answered, Number : " + number);
+        try {
+            ctx.stopService(new Intent(ctx, CallStartInfoService.class));
+        } catch (Exception e) {
+            Log.e(TAG, "onIncomingCallAnswered : " + e.toString());
+        }
     }
 
     @Override
     protected void onIncomingCallEnded(Context ctx, String number, Date start, Date end) {
         Log.d(TAG, "Incoming Call Ended, Number : " + number);
+        try {
+            ctx.stopService(new Intent(ctx, CallStartInfoService.class));
+        } catch (Exception e) {
+            Log.e(TAG, "onIncomingCallAnswered : " + e.toString());
+        }
 
         Toast.makeText(ctx, "Incoming Call from " + number, Toast.LENGTH_SHORT).show();
     }
@@ -58,6 +78,11 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onMissedCall(Context ctx, String number, Date start) {
         Log.d(TAG, "Missed Call, Number : " + number);
+        try {
+            ctx.stopService(new Intent(ctx, CallStartInfoService.class));
+        } catch (Exception e) {
+            Log.e(TAG, "onIncomingCallAnswered : " + e.toString());
+        }
 
         Toast.makeText(ctx, "Missed Call from " + number, Toast.LENGTH_SHORT).show();
     }
