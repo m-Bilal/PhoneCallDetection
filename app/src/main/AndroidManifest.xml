@@ -21,10 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".IncomingCallInfoActivity"
-            android:showOnLockScreen="true"
-            android:theme="@style/Theme.Transparent" />
 
         <!-- Broadcast Receiver and Intent filter for incoming and outgoing calls -->
         <receiver android:name=".CallReceiver">
@@ -39,7 +35,7 @@
         <service
             android:name=".service.CallStartInfoService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>

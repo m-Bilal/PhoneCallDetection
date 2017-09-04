@@ -24,17 +24,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the service
-
                 serviceRunning = true;
                 Intent intent = new Intent(getApplicationContext(), CallStartInfoService.class);
-                intent.putExtra("number", "<Phone Number>");
+                intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, "<Phone Number>");
                 startService(intent);
-
-                /*Intent intent = new Intent(getApplicationContext(), IncomingCallInfoActivity.class);
-                intent.putExtra("number", "<Call number>");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                */
             }
         });
     }
@@ -42,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(serviceRunning) {
+            // Stop the service
             stopService( new Intent(getApplicationContext(), CallStartInfoService.class));
+            serviceRunning = false;
         } else {
             super.onBackPressed();
         }

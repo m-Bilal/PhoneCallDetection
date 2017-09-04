@@ -22,23 +22,10 @@ public class CallReceiver extends PhonecallReceiver {
     protected void onIncomingCallReceived(final Context ctx, final String number, Date start) {
         Log.d(TAG, "Incoming Call Received, Number : " + number);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // Start the service
-                Intent intent = new Intent(ctx, CallStartInfoService.class);
-                intent.putExtra("number", number);
-                ctx.startService(intent);
-
-                /* Call to activity, to be removed
-                Intent intent = new Intent(ctx, IncomingCallInfoActivity.class);
-                intent.putExtra("number", number);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                ctx.startActivity(intent);
-                */
-            }
-        }, 2000);
+        // Start the service
+        Intent intent = new Intent(ctx, CallStartInfoService.class);
+        intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+        ctx.startService(intent);
     }
 
     @Override
