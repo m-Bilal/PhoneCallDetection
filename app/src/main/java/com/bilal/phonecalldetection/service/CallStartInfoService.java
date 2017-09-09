@@ -21,10 +21,12 @@ public class CallStartInfoService extends Service {
     private static final String TAG = "CallStartInfoService";
 
     public static final String INTENT_EXTRA_PHONE_NUMBER = "number";
+    public static final String INTENT_EXTRA_CALL_TYPE = "call_type";
 
     private WindowManager mWindowManager;
     private View mCallPopupView;
     private TextView mPhoneNumberTextView;
+    private TextView mCallTypeTextView;
     private LinearLayout mLinearLayout;
 
 
@@ -38,8 +40,9 @@ public class CallStartInfoService extends Service {
 
         //Inflate the popup layout
         mCallPopupView = LayoutInflater.from(this).inflate(R.layout.serivce_call_start_popup, null);
-        // Reference textview in popup layout
-        mPhoneNumberTextView = (TextView) mCallPopupView.findViewById(R.id.textview_incoming_call_number_CallStartIntentService);
+        // Reference views in popup layout
+        mPhoneNumberTextView = (TextView) mCallPopupView.findViewById(R.id.textview_call_number_CallStartIntentService);
+        mCallTypeTextView = (TextView) mCallPopupView.findViewById(R.id.textview_call_type_CallStartIntentService);
         mLinearLayout = (LinearLayout) mCallPopupView.findViewById(R.id.linear_layout_CallStartInfoService);
 
         //Add the view to the window.
@@ -127,6 +130,7 @@ public class CallStartInfoService extends Service {
 
         if (intent.getExtras() != null) {
             mPhoneNumberTextView.setText(intent.getExtras().getString(INTENT_EXTRA_PHONE_NUMBER));
+            mCallTypeTextView.setText(intent.getExtras().getString(INTENT_EXTRA_CALL_TYPE));
         }
 
         return START_NOT_STICKY;

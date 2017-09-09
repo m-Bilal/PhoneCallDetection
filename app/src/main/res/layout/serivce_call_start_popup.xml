@@ -19,20 +19,23 @@
         android:textColor="#000"/>
 
     <TextView
+        android:id="@+id/textview_call_type_CallStartIntentService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:text="Incoming Call"
         android:textColor="#F57F17"
         android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/textview_incoming_call_number_CallStartIntentService"
+        android:id="@+id/textview_call_number_CallStartIntentService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:textColor="#F57F17"
         android:text="Incoming Call"
         android:textSize="18sp"/>

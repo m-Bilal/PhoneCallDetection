@@ -25,6 +25,7 @@ public class CallReceiver extends PhonecallReceiver {
         // Start the service
         Intent intent = new Intent(ctx, CallStartInfoService.class);
         intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+        intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Incoming call from:");
         ctx.startService(intent);
     }
 
@@ -53,11 +54,22 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onOutgoingCallStarted(Context ctx, String number, Date start) {
         Log.d(TAG, "Outgoing Call Started, Number : " + number);
+
+        // Start the service
+        Intent intent = new Intent(ctx, CallStartInfoService.class);
+        intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+        intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Outgoing call to:");
+        ctx.startService(intent);
     }
 
     @Override
     protected void onOutgoingCallEnded(Context ctx, String number, Date start, Date end) {
         Log.d(TAG, "Outgoing Call Ended, Number : " + number);
+        try {
+            ctx.stopService(new Intent(ctx, CallStartInfoService.class));
+        } catch (Exception e) {
+            Log.e(TAG, "onIncomingCallAnswered : " + e.toString());
+        }
 
         Toast.makeText(ctx, "Outgoing Call to " + number, Toast.LENGTH_SHORT).show();
     }

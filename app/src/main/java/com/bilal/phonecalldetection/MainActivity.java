@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 serviceRunning = true;
                 Intent intent = new Intent(getApplicationContext(), CallStartInfoService.class);
                 intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, "<Phone Number>");
+                intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "<Call Type(Incoming/Outgoing)>");
                 startService(intent);
             }
         });
