@@ -23,10 +23,14 @@ public class CallReceiver extends PhonecallReceiver {
         Log.d(TAG, "Incoming Call Received, Number : " + number);
 
         // Start the service
-        Intent intent = new Intent(ctx, CallStartInfoService.class);
-        intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
-        intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Incoming call from:");
-        ctx.startService(intent);
+        try {
+            Intent intent = new Intent(ctx, CallStartInfoService.class);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Incoming call from:");
+            ctx.startService(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "onIncomingCallStarted : " + e.toString());
+        }
     }
 
     @Override
@@ -56,10 +60,14 @@ public class CallReceiver extends PhonecallReceiver {
         Log.d(TAG, "Outgoing Call Started, Number : " + number);
 
         // Start the service
-        Intent intent = new Intent(ctx, CallStartInfoService.class);
-        intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
-        intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Outgoing call to:");
-        ctx.startService(intent);
+        try {
+            Intent intent = new Intent(ctx, CallStartInfoService.class);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Outgoing call to:");
+            ctx.startService(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "onOutgoingCallStarted : " + e.toString());
+        }
     }
 
     @Override
