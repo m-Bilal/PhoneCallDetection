@@ -1,6 +1,8 @@
 package com.bilal.phonecalldetection.service;
 
+import android.app.KeyguardManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -41,15 +43,15 @@ public class CallStartInfoService extends Service {
         //Inflate the popup layout
         mCallPopupView = LayoutInflater.from(this).inflate(R.layout.serivce_call_start_popup, null);
         // Reference views in popup layout
-        mPhoneNumberTextView = (TextView) mCallPopupView.findViewById(R.id.textview_call_number_CallStartIntentService);
-        mCallTypeTextView = (TextView) mCallPopupView.findViewById(R.id.textview_call_type_CallStartIntentService);
-        mLinearLayout = (LinearLayout) mCallPopupView.findViewById(R.id.linear_layout_CallStartInfoService);
+        mPhoneNumberTextView = mCallPopupView.findViewById(R.id.textview_call_number_CallStartIntentService);
+        mCallTypeTextView = mCallPopupView.findViewById(R.id.textview_call_type_CallStartIntentService);
+        mLinearLayout = mCallPopupView.findViewById(R.id.linear_layout_CallStartInfoService);
 
         //Add the view to the window.
         final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 // Allow the activity behind the popup to receive touch events
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 // The following flags allow the popup to appear even when the device is locked
