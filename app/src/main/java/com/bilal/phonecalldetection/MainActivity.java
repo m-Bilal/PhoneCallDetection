@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestPermissions() {
         String permissions[] = {Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.PROCESS_OUTGOING_CALLS,
+                Manifest.permission.READ_CALL_LOG, // Required in API 26+ to be able to access number of incoming call
             Manifest.permission.SYSTEM_ALERT_WINDOW};
 
         ActivityCompat.requestPermissions(this, permissions, PERMISSION_ALL);

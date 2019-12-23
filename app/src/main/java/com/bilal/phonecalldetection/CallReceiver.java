@@ -19,7 +19,7 @@ public class CallReceiver extends PhonecallReceiver {
     public static final String TAG = "CallReceiver";
 
     @Override
-    protected void onIncomingCallReceived(final Context ctx, final String number, Date start) {
+    protected void onIncomingCallReceived(final Context ctx, String number, Date start) {
         Log.d(TAG, "Incoming Call Received, Number : " + number);
 
         // Start the service
@@ -86,7 +86,10 @@ public class CallReceiver extends PhonecallReceiver {
     protected void onMissedCall(Context ctx, String number, Date start) {
         Log.d(TAG, "Missed Call, Number : " + number);
         try {
-            ctx.stopService(new Intent(ctx, CallStartInfoService.class));
+            Intent intent = new Intent(ctx, CallStartInfoService.class);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_PHONE_NUMBER, number);
+            intent.putExtra(CallStartInfoService.INTENT_EXTRA_CALL_TYPE, "Incoming call from:");
+            ctx.startService(intent);
         } catch (Exception e) {
             Log.e(TAG, "onIncomingCallAnswered : " + e.toString());
         }
